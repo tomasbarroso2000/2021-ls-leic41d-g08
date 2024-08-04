@@ -1,0 +1,2105 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Sports",
+    "description": "Manage sports, routes and activities",
+    "termsOfService": "http://swagger.io/terms/",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Users",
+      "description": "User management"
+    },
+    {
+      "name": "Routes",
+      "description": "Routes management"
+    },
+    {
+      "name": "Sports",
+      "description": "Sports management"
+    },
+    {
+      "name": "Activities",
+      "description": "Activities management"
+    }
+  ],
+  "paths": {
+    "/api/users": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Create a user",
+        "description": "Create a user to be able to create sports, routes and activities",
+        "requestBody": {
+          "description": "Name and email",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewUser"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "A user has been created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserCreated"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Email is associated to another user or error in request body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get list of users",
+        "description": "Get a list of all the users in the database (number, name and email)",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Query to limit the list of users",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Query to skip on the list of users",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully got the list of users",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsersList"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/{userNumber}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get user details",
+        "description": "Get the details of a user in the database (number, name and email)",
+        "parameters": [
+          {
+            "name": "userNumber",
+            "in": "path",
+            "description": "The user's number",
+            "required": true,
+            "example": 2,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully got the user details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid user number",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User doesn't exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rankings/{sportNumber}/{routeNumber}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get list of user rankings",
+        "description": "Get a list of all the user rankings in the database (number, name and email) given a sport number and a route number",
+        "parameters": [
+          {
+            "name": "sportNumber",
+            "in": "path",
+            "description": "The sport's number",
+            "required": true,
+            "example": 2,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "routeNumber",
+            "in": "path",
+            "description": "The route's number",
+            "required": true,
+            "example": 2,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Query to limit the list of users",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Query to skip on the list of users",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully got the list of users",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsersList"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Sport or route doesn't exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/session": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get a session",
+        "description": "Get your session by providing an email and a password",
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Session retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Session"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid email or password",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid credentials",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/routes": {
+      "post": {
+        "tags": [
+          "Routes"
+        ],
+        "summary": "Create a route",
+        "description": "Create a route with a start lcoation and an end location",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "description": "Start location, end location and distance",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewRoute"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "A route has been created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreationDeletionSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in request body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "No token or invalid token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Routes"
+        ],
+        "summary": "Get list of routes",
+        "description": "Get a list of all the routes in the database (number, start location, end location, distance and user number)",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Query to limit the list of routes",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Query to skip on the list of routes",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully got the list of routes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoutesList"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/routes/{routeNumber}": {
+      "get": {
+        "tags": [
+          "Routes"
+        ],
+        "summary": "Get route details",
+        "description": "Get the details of a route in the database (number, start location, end location, distance and user number)",
+        "parameters": [
+          {
+            "name": "routeNumber",
+            "in": "path",
+            "description": "The route's number",
+            "required": true,
+            "example": 2,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully got the route details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RouteDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid route number",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Route doesn't exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Routes"
+        ],
+        "summary": "Update a route",
+        "description": "Update the details of a route in the database (startLocation, endLocation and distance)",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "routeNumber",
+            "in": "path",
+            "description": "The route's number",
+            "required": true,
+            "example": 2,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the route",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreationDeletionSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid route number",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "No token or invalid token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Route doesn't exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/search/routes": {
+      "get": {
+        "tags": [
+          "Routes"
+        ],
+        "summary": "Search routes",
+        "description": "Get a list of all the routes in the database (number, startLocation, endLocation, distance and userNumber) that correspond to the search query",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Search query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "lisbon"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Query to limit the list of routes",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Query to skip on the list of routes",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully got the list of routes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoutesList"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sports": {
+      "post": {
+        "tags": [
+          "Sports"
+        ],
+        "summary": "Create a sport",
+        "description": "Create a sport with a name and a description",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "description": "Name and description",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewSport"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "A sport has been created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreationDeletionSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in request body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "No token or invalid token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Sports"
+        ],
+        "summary": "Get list of sports",
+        "description": "Get a list of all the sports in the database (number, name, description and user number)",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Query to limit the list of sports",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Query to skip on the list of sports",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully got the list of sports",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SportsList"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sports/{sportNumber}": {
+      "get": {
+        "tags": [
+          "Sports"
+        ],
+        "summary": "Get sport details",
+        "description": "Get the details of a sport in the database (number, name, description and user number)",
+        "parameters": [
+          {
+            "name": "sportNumber",
+            "in": "path",
+            "description": "The sport's number",
+            "required": true,
+            "example": 2,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully got the sport details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SportDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid sport number",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Sport doesn't exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Sports"
+        ],
+        "summary": "Update a sport",
+        "description": "Update the details of a sport in the database (name and description)",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "sportNumber",
+            "in": "path",
+            "description": "The sport's number",
+            "required": true,
+            "example": 2,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the sport",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreationDeletionSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid sport number",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "No token or invalid token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Sport doesn't exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/search/sports": {
+      "get": {
+        "tags": [
+          "Sports"
+        ],
+        "summary": "Search sports",
+        "description": "Get a list of all the sports in the database (number, name, description and user number) that correspond to the search query",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Search query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "football"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Query to limit the list of sports",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Query to skip on the list of sports",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully got the list of sports",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SportsList"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/{userNumber}/activities": {
+      "get": {
+        "tags": [
+          "Activities"
+        ],
+        "summary": "Get a user's list of activities",
+        "description": "Get a list of all the activities a user has in the database (number, date, duration, user number, sport number, route number)",
+        "parameters": [
+          {
+            "name": "userNumber",
+            "in": "path",
+            "description": "The users's number",
+            "required": true,
+            "example": 2,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Query to limit the list of activities",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Query to skip on the list of activities",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully got the list of activities",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActivitiesList"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User doesn't exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sports/{sportNumber}/activities": {
+      "get": {
+        "tags": [
+          "Activities"
+        ],
+        "summary": "Get a sports's list of activities",
+        "description": "Get a list of all the activities a sport has in the database (number, date, duration, user number, sport number, route number)",
+        "parameters": [
+          {
+            "name": "sportNumber",
+            "in": "path",
+            "description": "The sports's number",
+            "required": true,
+            "example": 2,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Query to limit the list of activities",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Query to skip on the list of activities",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully got the list of activities",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActivitiesList"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Sport doesn't exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Activities"
+        ],
+        "summary": "Create an activity",
+        "description": "Create an activity for a sport with a date, duration and route number",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "sportNumber",
+            "in": "path",
+            "description": "The sports's number",
+            "required": true,
+            "example": 2,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Date, duration and route number",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewActivity"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "An activity has been created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreationDeletionSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in request body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "No token or invalid token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Sport doesn't exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/activities": {
+      "get": {
+        "tags": [
+          "Activities"
+        ],
+        "summary": "Get list of activities",
+        "description": "Get a list of all the activities in the database (number, date, duration, user number, sport number and route number)",
+        "parameters": [
+          {
+            "name": "sport",
+            "in": "query",
+            "description": "Sport number of the activities",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "Order by which to sort the activities (based on duration and defaults to ascending) (ascending/descending)",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "ascending"
+            }
+          },
+          {
+            "name": "route",
+            "in": "query",
+            "description": "Route number of the activities",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "Date of the activities",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "2022-03-26"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Query to limit the list of activities",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Query to skip on the list of activities",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully got the list of activities",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActivitiesList"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/activities/{activityNumber}": {
+      "get": {
+        "tags": [
+          "Activities"
+        ],
+        "summary": "Get activity details",
+        "description": "Get the details of an activity in the database (number, date, duration, user number, sport number and route number)",
+        "parameters": [
+          {
+            "name": "activityNumber",
+            "in": "path",
+            "description": "The activity's number",
+            "required": true,
+            "example": 2,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully got the activity details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActivityDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid activity number",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Activity doesn't exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Activities"
+        ],
+        "summary": "Delete activity",
+        "description": "Delete an activity from the database",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "activityNumber",
+            "in": "path",
+            "description": "The activity's number",
+            "required": true,
+            "example": 2,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the activity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreationDeletionSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid activity number",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "No token or invalid token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Activity doesn't exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Activities"
+        ],
+        "summary": "Update an activity",
+        "description": "Update the details of an activity in the database (date and duration)",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "activityNumber",
+            "in": "path",
+            "description": "The activity's number",
+            "required": true,
+            "example": 2,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the activity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreationDeletionSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid sport number",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "No token or invalid token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Activity doesn't exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/activities/delete": {
+      "post": {
+        "tags": [
+          "Activities"
+        ],
+        "summary": "Delete a list of activities",
+        "description": "Delete a list of activities from the database",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "description": "List of activity ID's to delete",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteActivities"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the activities",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteActivities"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid activity number",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "No token or invalid token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Activity doesn't exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      },
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    },
+    "schemas": {
+      "AppError": {
+        "type": "object",
+        "description": "Application error",
+        "required": [
+          "errorCode",
+          "errorMessage"
+        ],
+        "properties": {
+          "errorCode": {
+            "type": "integer",
+            "example": 1003
+          },
+          "errorMessage": {
+            "type": "string",
+            "example": "Something went wrong"
+          }
+        }
+      },
+      "UserCreated": {
+        "type": "object",
+        "description": "Object number",
+        "required": [
+          "number",
+          "token"
+        ],
+        "properties": {
+          "number": {
+            "type": "integer",
+            "example": 2
+          },
+          "token": {
+            "type": "string",
+            "example": "e2a6cf7c-7125-4a88-858a-2196d24e8ead"
+          }
+        }
+      },
+      "CreationDeletionSuccess": {
+        "type": "object",
+        "description": "Object number",
+        "required": [
+          "number"
+        ],
+        "properties": {
+          "number": {
+            "type": "integer",
+            "example": 2
+          }
+        }
+      },
+      "NewUser": {
+        "type": "object",
+        "description": "Name, email and password of new user",
+        "required": [
+          "name",
+          "email",
+          "password"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Fiona"
+          },
+          "email": {
+            "type": "string",
+            "example": "iloveshrek@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "shrekinho"
+          }
+        }
+      },
+      "UsersList": {
+        "type": "object",
+        "required": [
+          "list",
+          "hasMore"
+        ],
+        "properties": {
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserDetails"
+            }
+          },
+          "hasMore": {
+            "type": "boolean",
+            "example": true
+          }
+        }
+      },
+      "UserDetails": {
+        "type": "object",
+        "description": "Number, name and email of user",
+        "required": [
+          "number",
+          "name",
+          "email"
+        ],
+        "properties": {
+          "number": {
+            "type": "integer",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "example": "Fiona"
+          },
+          "email": {
+            "type": "string",
+            "example": "iloveshrek@gmail.com"
+          }
+        }
+      },
+      "Session": {
+        "type": "object",
+        "description": "Retrieved token",
+        "required": [
+          "number",
+          "name",
+          "token"
+        ],
+        "properties": {
+          "number": {
+            "type": "integer",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "example": "Fiona"
+          },
+          "token": {
+            "type": "string",
+            "example": "e2a6cf7c-7125-4a88-858a-2196d24e8ead"
+          }
+        }
+      },
+      "NewRoute": {
+        "type": "object",
+        "description": "Start location, end location and distance of new route",
+        "required": [
+          "startLocation",
+          "endLocation",
+          "duration"
+        ],
+        "properties": {
+          "startLocation": {
+            "type": "string",
+            "example": "Lisboa"
+          },
+          "endLocation": {
+            "type": "string",
+            "example": "Lagos"
+          },
+          "distance": {
+            "type": "number",
+            "example": 300
+          }
+        }
+      },
+      "RoutesList": {
+        "type": "object",
+        "required": [
+          "list",
+          "hasMore"
+        ],
+        "properties": {
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RouteDetails"
+            }
+          },
+          "hasMore": {
+            "type": "boolean",
+            "example": true
+          }
+        }
+      },
+      "RouteDetails": {
+        "type": "object",
+        "description": "Number, start location, end location, distance and user number",
+        "required": [
+          "number",
+          "startLocation",
+          "endLocation",
+          "distance",
+          "user"
+        ],
+        "properties": {
+          "number": {
+            "type": "integer",
+            "example": 1
+          },
+          "startLocation": {
+            "type": "string",
+            "example": "Lisboa"
+          },
+          "endLocation": {
+            "type": "string",
+            "example": "Lagos"
+          },
+          "distance": {
+            "type": "number",
+            "example": 300
+          },
+          "user": {
+            "type": "object",
+            "required": [
+              "number",
+              "name"
+            ],
+            "properties": {
+              "number": {
+                "type": "integer",
+                "example": 2
+              },
+              "name": {
+                "type": "string",
+                "example": "Fiona"
+              }
+            }
+          }
+        }
+      },
+      "NewSport": {
+        "type": "object",
+        "description": "Name and description of new sport",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Futebol"
+          },
+          "description": {
+            "type": "string",
+            "example": "Jogo da bola"
+          }
+        }
+      },
+      "SportsList": {
+        "type": "object",
+        "required": [
+          "list",
+          "hasMore"
+        ],
+        "properties": {
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SportDetails"
+            }
+          },
+          "hasMore": {
+            "type": "boolean",
+            "example": true
+          }
+        }
+      },
+      "SportDetails": {
+        "type": "object",
+        "description": "Number, name, description and user number",
+        "required": [
+          "number",
+          "name",
+          "user"
+        ],
+        "properties": {
+          "number": {
+            "type": "integer",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "example": "Futebol"
+          },
+          "description": {
+            "type": "string",
+            "example": "Jogo da bola"
+          },
+          "user": {
+            "type": "object",
+            "required": [
+              "number",
+              "name"
+            ],
+            "properties": {
+              "number": {
+                "type": "integer",
+                "example": 2
+              },
+              "name": {
+                "type": "string",
+                "example": "Fiona"
+              }
+            }
+          }
+        }
+      },
+      "NewActivity": {
+        "type": "object",
+        "description": "Date, duration and route number",
+        "required": [
+          "date",
+          "duration",
+          "routeNumber"
+        ],
+        "properties": {
+          "date": {
+            "type": "string",
+            "example": "2022-03-27"
+          },
+          "duration": {
+            "type": "string",
+            "example": "PT5H20M50S"
+          },
+          "routeNumber": {
+            "type": "integer",
+            "example": 1
+          }
+        }
+      },
+      "ActivitiesList": {
+        "type": "object",
+        "required": [
+          "list",
+          "hasMore"
+        ],
+        "properties": {
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ActivityDetails"
+            }
+          },
+          "hasMore": {
+            "type": "boolean",
+            "example": true
+          }
+        }
+      },
+      "ActivityDetails": {
+        "type": "object",
+        "description": "Number, date, duration, user number, sport number and route number",
+        "required": [
+          "number",
+          "date",
+          "duration",
+          "user",
+          "sport"
+        ],
+        "properties": {
+          "number": {
+            "type": "integer",
+            "example": 1
+          },
+          "date": {
+            "type": "string",
+            "example": "2022-06-01"
+          },
+          "duration": {
+            "type": "string",
+            "example": "PT36H50M"
+          },
+          "user": {
+            "type": "object",
+            "required": [
+              "number",
+              "name"
+            ],
+            "properties": {
+              "number": {
+                "type": "integer",
+                "example": 2
+              },
+              "name": {
+                "type": "string",
+                "example": "Fiona"
+              }
+            }
+          },
+          "sport": {
+            "type": "object",
+            "required": [
+              "number",
+              "name"
+            ],
+            "properties": {
+              "number": {
+                "type": "integer",
+                "example": 1
+              },
+              "name": {
+                "type": "string",
+                "example": "Football"
+              }
+            }
+          },
+          "route": {
+            "type": "object",
+            "required": [
+              "number",
+              "name"
+            ],
+            "properties": {
+              "number": {
+                "type": "integer",
+                "example": 2
+              },
+              "name": {
+                "type": "string",
+                "example": "Lis-Por (300 km)"
+              }
+            }
+          }
+        }
+      },
+      "DeleteActivities": {
+        "type": "array",
+        "description": "ID's of activities to be deleted",
+        "items": {
+          "type": "integer",
+          "example": 1
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,499 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+html {
+    -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadein 2s; /* Firefox < 16 */
+    -ms-animation: fadein 2s; /* Internet Explorer */
+    -o-animation: fadein 2s; /* Opera < 12.1 */
+    animation: fadein 2s;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+* {
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+}
+
+nav {
+    top: 0;
+    position: fixed;
+    background-color: #151D3B;
+    width: 100%;
+    height: 60px;
+    vertical-align: middle;
+    z-index: 99;
+}
+
+nav p {
+    display: inline-block;
+    float: right;
+    color: white;
+    margin-right: 20px;
+    margin-top: 20px;
+}
+
+nav button {
+    display: inline-block;
+    float: right;
+    top: 0;
+    margin-top: 15px;
+    margin-right: 15px;
+    border: none;
+    background-color: #D82148;
+    color: white;
+    border-radius: 2px;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: 0.4s;
+}
+
+nav button a {
+    text-decoration: none;
+    color: black;
+}
+
+nav button:hover {
+    background-color: white;
+    color: #D82148;
+    transition: 0.4s;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    width: max-content;
+    height: 100%;
+    display: inline-block;
+}
+
+nav li {
+    float: left;
+    padding: 20px 16px;
+    color: white
+}
+
+nav li a#home {
+    color: #D82148;
+}
+
+nav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    transition: .4s;
+}
+
+nav li a:hover {
+    margin-top: -5px;
+    padding-bottom: 5px;
+    transition: .4s;
+}
+
+li a, ul a {
+    text-decoration: none;
+    color: #7f8ab6;
+    transition: .4s;
+}
+
+li a:hover, ul a:hover {
+    color: #D82148;
+    transition: .4s;
+}
+
+div#mainContent {
+    margin-top: 50px;
+    text-align: center;
+}
+
+div#mainContent div#login {
+    margin: 30vh auto;
+    background-color: #151D3B;
+    max-width: fit-content;
+    border-radius: 4px;
+    padding: 0 50px 25px;
+    color: white;
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+
+div#login h1 {
+    padding-top: 25px;
+    color: white;
+}
+
+div#login div {
+    text-align: center;
+}
+
+div#login input {
+    border: none;
+    outline: none;
+    padding-left: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 12pt;
+    border-radius: 2px;
+    width: 200px;
+    right: 0;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+div#login label {
+    width: 100px;
+    color: white;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+div#mainContent img#homeImage {
+    width: 100%;
+    height: 90vh;
+    margin: auto;
+}
+
+div#mainContent h1 {
+    margin-top: 100px;
+}
+
+div#mainContent h1#homeImageText {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 52px;
+}
+
+div#mainContent button {
+    margin: 5px;
+}
+
+div#mainContent div.content {
+    margin-top: 50px;
+    background-color: #DADBBD;
+    width: 150px;
+    color: #151D3B;
+    border-radius: 2px;
+    margin-left: 15px;
+    display: block;
+    padding: 15px 15px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    transition: 0.4s;
+}
+
+div#mainContent div.text ul div ul > * {
+    text-align: center;
+}
+
+div#mainContent div.content:hover {
+    background-color: #151D3B;
+    color: white;
+    transition: 0.4s;
+}
+
+div#mainContent button {
+    border: none;
+    background-color: #D82148;
+    color: white;
+    border-radius: 2px;
+    padding: 5px 10px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    transition: 0.4s;
+}
+
+div#mainContent p {
+    text-align: justify;
+}
+
+div#mainContent button:hover {
+    background-color: #fbb02d;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+div#mainContent a {
+    margin-top: 10px;
+}
+
+div#mainContent ul {
+    text-align: left;
+    width: auto;
+    height: auto;
+    margin-top: 85px;
+    list-style-type: none;
+    display: block;
+}
+
+div#mainContent ul li {
+    display: block;
+    font-size: 18pt;
+}
+
+div#mainContent div.contentSearch {
+    text-align: center;
+    display: inline-block;
+    margin: 0;
+    background-color: #151D3B;
+    max-width: fit-content;
+    border-radius: 4px;
+    padding: 0 150px 25px;
+    color: white;
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+
+
+div.contentSearch label, input {
+    display: block;
+    margin: 10px auto;
+}
+
+div.contentSearch div.contentSearch input[type="button"] {
+    border: none;
+    background-color: #D82148;
+    color: white;
+    border-radius: 2px;
+    padding: 5px 10px;
+    display: block;
+    margin: 20px auto;
+}
+
+div.contentSearch div.contentSearch input[type="button"]:hover {
+    background-color: #F55353;
+    cursor: pointer;
+}
+
+div#mainContent div.text {
+    display: block;
+    margin: 100px auto;
+    background-color: #DADBBD;
+    color: #151D3B;
+    border-radius: 2px;
+    width: fit-content;
+    padding: 15px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+div#mainContent div.text ul {
+    margin: 0;
+    padding: 0;
+}
+
+div#mainContent div.text ul div {
+    text-align: center;
+    font-size: 20px;
+}
+
+div#mainContent div.text ul div ul {
+    margin-top: 20px;
+}
+
+div#mainContent div.text ul div ul li {
+    text-align: center;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    background-color: #151D3B;
+    color: white;
+    width: 100%;
+    text-align: center;
+}
+
+footer p {
+    margin: 10px 0;
+    font-size: 12px;
+}
+
+div.alert {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 99999;
+    width: 15vw;
+    height: 20vh;
+    background-color: #E5E5E5;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    border-radius: 4px;
+    text-align: center;
+}
+
+div.alert h1 {
+    font-size: 28px;
+}
+
+div.alert p {
+    font-size: 20px;
+}
+
+div.alert p, h1 {
+    margin-top: 10px;
+    color: black;
+}
+
+div.alert button {
+    margin-top: 10px;
+    background-color: #151D3B;
+    transition: 0.4s;
+    width: 60px;
+    padding: 5px 10px;
+    border-radius: 2em;
+    border: 3px solid white;
+    color: white;
+}
+
+div.alert button:hover {
+    background-color: white;
+    transition: 0.4s;
+    cursor: pointer;
+    color: #363636;
+}
+
+div#mainContent #icon {
+    width: auto;
+    height: 30vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 60px;
+}
+
+div#mainContent div.scroll {
+    border-radius: 2px;
+    width: fit-content;
+    padding-left: 50px;
+    padding-right: 50px;
+    height: 350px;
+    display: block;
+    margin: auto;
+    overflow-y: scroll;
+    padding-bottom: 50px;
+}
+
+div#mainContent div.innerScroll {
+    width: fit-content;
+    padding-left: 50px;
+    padding-right: 50px;
+    height: 100px;
+    display: block;
+    margin: auto;
+    overflow-y: scroll;
+    padding-bottom: 0px;
+}
+
+div#mainContent div.scroll::-webkit-scrollbar-track {
+    display: none;
+}
+
+div#mainContent div.innerScroll::-webkit-scrollbar-track {
+    display: none;
+}
+
+div#mainContent div.innerScroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+div#mainContent div.scroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+div#mainContent div.innerScroll::-webkit-scrollbar-thumb {
+    background-color: #c2c2c2;
+    border-radius: 10px;
+    border: 3px none #ffffff;
+}
+
+div#mainContent div.scroll::-webkit-scrollbar-thumb {
+    background-color: #c2c2c2;
+    border-radius: 10px;
+    border: 3px none #ffffff;
+}
+
+div#mainContent div.scroll > * {
+    color: black;
+    text-decoration: none;
+}
+
+.activitiesSearchBox {
+    text-align: left;
+}
+
+.activitiesSearchBox label {
+    text-align: center;
+}
+
+.activitiesSearchBox > input, select {
+    display: inline-block;
+}
+
+.activitiesSearchBox input {
+    border: 1px solid black;
+    border-radius: 2px;
+    /*margin-right: 5px;*/
+}
+
+.activitiesSearchBox select {
+    position: absolute;
+    margin-top: 10px;
+    text-align: left;
+    border: 1px solid black;
+    border-radius: 2px;
+    min-width: 100px;
+}
+
+div#mainContent h1 {
+    margin-bottom: 20px;
+}
